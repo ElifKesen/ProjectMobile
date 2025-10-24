@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import javax.sound.midi.InvalidMidiDataException;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertTrue;
 import static utilities.Driver.getAppiumDriver;
@@ -120,6 +121,5 @@ public class OptionsMet {
         // expectedConditions.visibilityOf(element) koşulu gerçekleşene kadar bekler.
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
-
 }
 

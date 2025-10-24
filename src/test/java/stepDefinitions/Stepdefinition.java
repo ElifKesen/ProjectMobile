@@ -1,5 +1,8 @@
 package stepDefinitions;
 
+import io.appium.java_client.MobileBy;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import page.QueryCardPage;
 import io.appium.java_client.android.AndroidDriver;
 import io.cucumber.java.en.Given;
@@ -44,7 +47,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("User clicks the button with description {string}")
     public void user_clicks_the_button_with_description(String description) {
-        ReusableMethods.wait(5);
+        ReusableMethods.wait(6);
         clickButtonByDescription(description);
     }
 
@@ -131,7 +134,7 @@ public class Stepdefinition extends OptionsMet {
     /***US 11   **/
     @Given("User clicks the button with itemName {string} and {string} and {string} added WishList")
     public void user_clicks_the_button_with_item_name_and_and_added_wish_list(String itemName, String reviews, String price) {
-        xPathElementClick(itemName, reviews, price);
+       xPathElementClick(itemName, reviews, price);
     }
 
     @Given("Toaster is displayed")
@@ -143,8 +146,35 @@ public class Stepdefinition extends OptionsMet {
     @Given("Driver turns off")
     public void driver_turns_off() {
         quitAppiumDriver();
+
+
+
+    }
+//06
+    @Then("Verifies that the text {string} is displayed on the screen")
+    public void verifies_that_the_text_is_displayed_on_the_screen(String name) {
+        ReusableMethods.wait(1);
+        VerifyElementText(name);
     }
 
+    @When("User enters phone number {string} into the phone number textbox")
+    public void user_enters_phone_number_into_the_phone_number_textbox(String phone) {
+         card.ForgetPasswordPhoneBox(phone);
+    }
+
+    @When("User enters {string} into both the New Password and Confirm Password textboxes")
+    public void user_enters_into_both_the_new_password_and_confirm_password_textboxes(String newPassword) {
+        card.NewPassword(newPassword);
+    }
+
+    @Then("Verifies that the username {string} is displayed on the screen")
+    public void verifies_that_the_username_is_displayed_on_the_screen(String username) {
+        ReusableMethods.wait(2);
+        VerifyElementText(username);
+
+
+
+    }
 
     }
 
