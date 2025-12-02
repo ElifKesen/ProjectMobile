@@ -1,38 +1,35 @@
 package stepDefinitions;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.cucumber.java.en.And;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import io.cucumber.java.en.Then;
-import page.QueryCardPage;
-import io.appium.java_client.android.AndroidDriver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import page.QueryCardPage;
 import utilities.Driver;
 import utilities.OptionsMet;
 import utilities.ReusableMethods;
 
 import javax.sound.midi.InvalidMidiDataException;
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
-import static org.junit.Assert.assertFalse;
-import static page.QueryCardPage.driver;
 import static org.junit.Assert.assertTrue;
+import static page.QueryCardPage.driver;
 import static utilities.Driver.getAppiumDriver;
 import static utilities.Driver.quitAppiumDriver;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.WebElement;
+
 
 public class Stepdefinition extends OptionsMet {
-    page.QueryCardPage card=new page.QueryCardPage();
+    page.QueryCardPage card=new QueryCardPage();
     Actions actions = new Actions(getAppiumDriver());
 
 
@@ -112,7 +109,8 @@ public class Stepdefinition extends OptionsMet {
 
         Assert.assertTrue(actual.contains(productName));
     }
-//27
+
+    //27
     @Given("As a user muss be {string} phone and {string} password Login")
     public void as_a_user_muss_be_phone_and_password_login(String phoneNumber, String password) {
         card.Login(phoneNumber, password);
@@ -127,6 +125,7 @@ public class Stepdefinition extends OptionsMet {
 
     @Given("User swipe to screen coordinates {int}, {int}, {int}, {int}")
     public void user_swipe_to_screen_coordinates(Integer x, Integer y, Integer endX, Integer endY) throws InvalidMidiDataException {
+        ReusableMethods.wait(2);
         OptionsMet.swipe(x, y, endX, endY);
         ReusableMethods.wait(2);
     }
@@ -134,7 +133,7 @@ public class Stepdefinition extends OptionsMet {
     /***US 11   **/
     @Given("User clicks the button with itemName {string} and {string} and {string} added WishList")
     public void user_clicks_the_button_with_item_name_and_and_added_wish_list(String itemName, String reviews, String price) {
-       xPathElementClick(itemName, reviews, price);
+        xPathElementClick(itemName, reviews, price);
     }
 
     @Given("Toaster is displayed")
@@ -148,9 +147,9 @@ public class Stepdefinition extends OptionsMet {
         quitAppiumDriver();
 
 
-
     }
-//06
+
+    //06
     @Then("Verifies that the text {string} is displayed on the screen")
     public void verifies_that_the_text_is_displayed_on_the_screen(String name) {
         ReusableMethods.wait(1);
@@ -159,7 +158,7 @@ public class Stepdefinition extends OptionsMet {
 
     @When("User enters phone number {string} into the phone number textbox")
     public void user_enters_phone_number_into_the_phone_number_textbox(String phone) {
-         card.ForgetPasswordPhoneBox(phone);
+        card.ForgetPasswordPhoneBox(phone);
     }
 
     @When("User enters {string} into both the New Password and Confirm Password textboxes")
@@ -173,10 +172,73 @@ public class Stepdefinition extends OptionsMet {
         VerifyElementText(username);
 
 
+    }
+
+    //25
+    @Given("Select with description {string}")
+    public void select_with_description(String delivered) {
+        ReusableMethods.wait(2);
+        ReusableMethods.scrollWithPartialContentDesc(delivered);
+    }
+
+    //24
+    @Given("User adds an item to shopping card and goes to the shopping card.")
+    public void user_adds_an_item_to_shopping_card_and_goes_to_the_shopping_card() throws
+            InvalidMidiDataException {
+        card.firstElementOfMostPopuler.click();
+        card.LSizeButton.click();
+        OptionsMet.swipe(832, 1772, 832, 1242);
+        ReusableMethods.wait(2);
+        OptionsMet.clickButtonByDescription("Add To Cart");
+        ReusableMethods.wait(1);
+        card.sepetIcon.click();
+        ReusableMethods.wait(1);
+
 
     }
 
+    @Given("User selects an address for shipping.")
+    public void user_selects_an_address_for_shipping() throws InvalidMidiDataException {
+        touchDown(889, 838);
+        OptionsMet.swipe(1185, 2017, 1185, 1282);
     }
+
+    @Given("User verifies the {string} button is viewable and clickable")
+    public void user_verifies_the_button_is_viewable_and_clickable(String text) {
+
+        // OptionsMet.viewAndClick(text);
+        AndroidDriver driver = (AndroidDriver) getAppiumDriver();
+        WebElement button = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiSelector().description(\"" + text + "\")"));
+
+        assertTrue(button.isDisplayed());
+        assertTrue(button.isEnabled());
+        button.click();
+
+    }
+
+    @Given("User fills card informations and clicks the confirm button")
+    public void user_fills_card_informations_and_clicks_the_confirm_button() {
+       /*
+        ReusableMethods.wait(6);
+       // touchDown(628, 548);
+       // ReusableMethods.wait(3);
+        OptionsMet.enterCardNumber(628,548,"42424242424242421226123");
+        //actions.sendKeys("424242424242424212261231234512").perform();
+        ReusableMethods.wait(2);
+        touchDown(691, 777);
+        ReusableMethods.wait(5);
+
+        */
+
+        ReusableMethods.wait(2);
+        OptionsMet.enterCardNumber("42424242424242421226123");
+        ReusableMethods.wait(2);
+        touchDown(691, 777); // Confirm butonuna tıklama
+        ReusableMethods.wait(2);
+    }
+}
+    
 
 
 

@@ -184,6 +184,17 @@ public class QueryCardPage {
     }
 
 
+    //24
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Flower Print Foil T-shirt\n" +
+            "0 (0  Reviews)\n" +
+            "$65.00\")")
+    public WebElement firstElementOfMostPopuler;
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"L\")")
+    public WebElement LSizeButton;
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.ImageView\").instance(12)")
+    public WebElement sepetIcon;
+
+
 }
 
 
