@@ -89,7 +89,7 @@ public class Stepdefinition extends OptionsMet {
     @Given("Verify that the product details page for the selected product is displayed.")
     public void verify_that_the_product_details_page_for_the_selected_product_is_displayed() {
 
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(3);
         if (card.productName == null) {
             throw new AssertionError("Element 'card.productName' bulunamadı!");
         }
@@ -158,11 +158,13 @@ public class Stepdefinition extends OptionsMet {
 
     @When("User enters phone number {string} into the phone number textbox")
     public void user_enters_phone_number_into_the_phone_number_textbox(String phone) {
+        ReusableMethods.wait(1);
         card.ForgetPasswordPhoneBox(phone);
     }
 
     @When("User enters {string} into both the New Password and Confirm Password textboxes")
     public void user_enters_into_both_the_new_password_and_confirm_password_textboxes(String newPassword) {
+        ReusableMethods.wait(1);
         card.NewPassword(newPassword);
     }
 
@@ -231,11 +233,11 @@ public class Stepdefinition extends OptionsMet {
 
         */
 
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(3);
         OptionsMet.enterCardNumber("42424242424242421226123");
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(3);
         touchDown(691, 777); // Confirm butonuna tıklama
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(3);
     }
 }
     

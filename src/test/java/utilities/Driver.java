@@ -24,12 +24,12 @@ public class Driver {
                 case "Android":
                     options = new UiAutomator2Options();
                     options.setPlatformName("Android").setAutomationName("UiAutomator2");
-                    options.setApp("C:\\Users\\elifk\\IdeaProjects\\MobileQueryCard-main\\src\\test\\java\\Apps\\querycart2006.apk");
+                    //options.setApp("C:\\Users\\elifk\\IdeaProjects\\ProjectMobile\\src\\test\\java\\Apps\\querycart2006.apk");
                     options.setAppPackage("com.wise.querycart");
                     options.setAppActivity("com.wise.querycart.MainActivity");
                     options.setUdid("emulator-5554");
                     options.setNoReset(false);
-                    options.autoGrantPermissions();
+                    options.autoGrantPermissions(); //devam etme izni icin
                     options.setNewCommandTimeout(Duration.ofMinutes(20));
                     try {
                         driver = new AndroidDriver(
